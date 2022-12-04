@@ -1,5 +1,6 @@
 import 'package:elsheikh_store/data/data_source/remote_data_source.dart';
 import 'package:elsheikh_store/data/mapper/mapper.dart';
+import 'package:elsheikh_store/data/network/error_handler.dart';
 import 'package:elsheikh_store/data/network/network_info.dart';
 import 'package:elsheikh_store/domain/model/models.dart';
 import 'package:elsheikh_store/data/network/requests.dart';
@@ -19,16 +20,17 @@ class RepositoryImpl implements Repository {
         final response = await _remoteDataSource.login(loginRequest);
         if (response.token!.isNotEmpty) {
           //return the data
+          print(response);
           return Right(response.toDomain());
         } else {
           return Left(Failure(409, "business error"));
         }
       } catch (error) {
-        return Left(Failure(505, error.toString()));
+        return Left(ErrorHandler.handle(error).failure);
       }
     } else {
       //no Internet Connection!
-      return Left(Failure(501, "please check your internet connection"));
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
 }

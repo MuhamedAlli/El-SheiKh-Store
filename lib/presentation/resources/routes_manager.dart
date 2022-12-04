@@ -1,3 +1,4 @@
+import '../../app/dependancy_injection.dart';
 import 'strings_manager.dart';
 import '../screens/login/login_view.dart';
 import '../screens/main/main_view.dart';
@@ -24,8 +25,9 @@ class RouteGenerator {
           builder: ((_) => const SplashView()),
         );
       case Routes.loginRoute:
+        initLoginModule();
         return MaterialPageRoute(
-          builder: ((_) => const LoginView()),
+          builder: ((_) => const LoginPage()),
         );
       case Routes.registerRoute:
         return MaterialPageRoute(

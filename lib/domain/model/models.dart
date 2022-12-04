@@ -1,3 +1,6 @@
+export 'password.dart';
+export 'username.dart';
+
 //onBoarding Model
 class SliderObject {
   String title;

@@ -1,14 +1,31 @@
+import 'package:elsheikh_store/app/dependancy_injection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
-  @override
-  State<LoginView> createState() => _LoginViewState();
-}
+import '../../../domain/busniness_logic/login/bloc/loging_bloc.dart';
+import 'login_form.dart';
 
-class _LoginViewState extends State<LoginView> {
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
+  static Route<void> route() {
+    return MaterialPageRoute<void>(builder: (_) => const LoginPage());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(title: const Text('Login')),
+      body: Padding(
+        padding: const EdgeInsets.all(12),
+        child: BlocProvider(
+          create: (context) {
+            LoginBloc loginBloc = instance<LoginBloc>();
+            return loginBloc;
+          },
+          child: const LoginForm(),
+        ),
+      ),
+    );
   }
 }
