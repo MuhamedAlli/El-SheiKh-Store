@@ -50,13 +50,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) async {
     if (state.status.isValidated) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
-      try {
-        await _loginUseCase.excute(
-            LoginUseCaseInput(state.username.value, state.password.value));
-        emit(state.copyWith(status: FormzStatus.submissionSuccess));
-      } catch (_) {
-        emit(state.copyWith(status: FormzStatus.submissionFailure));
-      }
+      final result = await _loginUseCase.excute(
+          LoginUseCaseInput(state.username.value, state.password.value));
+      result.fold((failure) {
+        print(failure.code);
+        return emit(state.copyWith(status: FormzStatus.submissionFailure));
+      }, (success) {
+        print(success.token);
+        return emit(state.copyWith(status: FormzStatus.submissionSuccess));
+      });
     }
   }
 }

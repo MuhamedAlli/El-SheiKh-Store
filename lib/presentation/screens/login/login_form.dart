@@ -89,7 +89,9 @@ class _LoginButton extends StatelessWidget {
                 key: const Key('loginForm_continue_raisedButton'),
                 onPressed: state.status.isValidated
                     ? () {
-                        context.read<LoginBloc>().add(const LoginSubmitted());
+                        //context.read<LoginBloc>().add(const LoginSubmitted());
+                        BlocProvider.of<LoginBloc>(context)
+                            .add(const LoginSubmitted());
                       }
                     : null,
                 child: const Text('Login'),

@@ -19,10 +19,7 @@ class LoginPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: BlocProvider(
-          create: (context) {
-            LoginBloc loginBloc = instance<LoginBloc>();
-            return loginBloc;
-          },
+          create: (context) => instance<LoginBloc>(),
           child: const LoginForm(),
         ),
       ),

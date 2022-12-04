@@ -21,13 +21,13 @@ class DioFactory {
     Map<String, String> headers = {
       CONTENT_TYPE: APPLICATION_JSON,
       ACCEPT: APPLICATION_JSON,
-      AUTHORIZATION: Constants.token,
       DEFAULT_LANGUAGE: language
     };
     dio.options = BaseOptions(
       baseUrl: Constants.baseUrl,
       headers: headers,
       receiveTimeout: Constants.apiTimeOut,
+      connectTimeout: Constants.apiTimeOut,
       sendTimeout: Constants.apiTimeOut,
     );
     if (!kReleaseMode) {
