@@ -11,7 +11,7 @@ import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../domain/busniness_logic/login/bloc/loging_bloc.dart';
+import '../presentation/business_logic/bloc/login_bloc/login_bloc.dart';
 
 final instance = GetIt.instance;
 Future<void> initAppModule() async {

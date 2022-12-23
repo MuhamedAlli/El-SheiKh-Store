@@ -20,13 +20,13 @@ class RepositoryImpl implements Repository {
         final response = await _remoteDataSource.login(loginRequest);
         if (response.token!.isNotEmpty) {
           //return the data
-          print(response.token);
+          //print(response.token);
           return Right(response.toDomain());
         } else {
           return Left(Failure(409, "business error"));
         }
       } catch (error) {
-        print(error.toString());
+        // print(error.toString());
         return Left(ErrorHandler.handle(error).failure);
       }
     } else {

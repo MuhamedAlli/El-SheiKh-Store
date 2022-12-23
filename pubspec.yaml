@@ -38,6 +38,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
+  flutter_gen: ^5.1.0+1
   flutter_svg: ^1.1.6
   formz: ^0.4.1
   get_it: ^7.2.0

@@ -1,4 +1,4 @@
-part of 'package:elsheikh_store/domain/busniness_logic/login/bloc/loging_bloc.dart';
+part of 'login_bloc.dart';
 
 class LoginState extends Equatable {
   const LoginState({
@@ -6,7 +6,6 @@ class LoginState extends Equatable {
     this.username = const Username.pure(),
     this.password = const Password.pure(),
   });
-
   final FormzStatus status;
   final Username username;
   final Password password;
@@ -17,10 +16,9 @@ class LoginState extends Equatable {
     Password? password,
   }) {
     return LoginState(
-      status: status ?? this.status,
-      username: username ?? this.username,
-      password: password ?? this.password,
-    );
+        status: status ?? this.status,
+        username: username ?? this.username,
+        password: password ?? this.password);
   }
 
   @override
