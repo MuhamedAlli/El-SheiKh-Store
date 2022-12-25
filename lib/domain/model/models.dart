@@ -14,3 +14,41 @@ class LoginModel {
   String token;
   LoginModel(this.token);
 }
+
+class Rating {
+  double rate;
+  int count;
+
+  Rating(this.rate, this.count);
+}
+
+class Products {
+  int id;
+  String title;
+  double price;
+  String description;
+  String category;
+  String image;
+  Rating rating;
+
+  Products(this.id, this.title, this.price, this.description, this.category,
+      this.image, this.rating);
+}
+
+class HomeProducts {
+  List<Products> products;
+  HomeProducts(this.products);
+}
+
+class Category {
+  int id;
+  String title;
+  int price;
+  String description;
+  String category;
+  String image;
+  Rating rating;
+
+  Category(this.id, this.title, this.price, this.description, this.category,
+      this.image, this.rating);
+}

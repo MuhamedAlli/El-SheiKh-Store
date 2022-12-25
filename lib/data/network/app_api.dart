@@ -10,4 +10,8 @@ abstract class AppServiceClient {
   @POST("/auth/login")
   Future<LoginResponse> login(
       @Field("username") String username, @Field("password") String password);
+  @GET("/products/")
+  Future<HomeProductsResponse?> getHomeProducts();
+  @GET("/products/category/")
+  Future<HomeProductsResponse?> getHomeCategory(@Path() String categoryName);
 }
