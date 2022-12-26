@@ -50,13 +50,13 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
-  Future<HomeProductsResponse?> getHomeProducts() async {
+  Future<List<ProductsResponse>?> getHomeProducts() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>?>(
-        _setStreamType<HomeProductsResponse>(Options(
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<ProductsResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -68,20 +68,21 @@ class _AppServiceClient implements AppServiceClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data == null
-        ? null
-        : HomeProductsResponse.fromJson(_result.data!);
+    var value = _result.data
+        ?.map(
+            (dynamic i) => ProductsResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
   @override
-  Future<HomeProductsResponse?> getHomeCategory(categoryName) async {
+  Future<List<ProductsResponse>?> getHomeCategory(categoryName) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>?>(
-        _setStreamType<HomeProductsResponse>(Options(
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<ProductsResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -93,9 +94,10 @@ class _AppServiceClient implements AppServiceClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data == null
-        ? null
-        : HomeProductsResponse.fromJson(_result.data!);
+    var value = _result.data
+        ?.map(
+            (dynamic i) => ProductsResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 

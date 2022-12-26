@@ -10,21 +10,25 @@ extension LoginResponseMapper on LoginResponse? {
   }
 }
 
-extension ProductsResponseMapper on ProductsResponse? {
-  Products toDomain() {
-    Rating rating =
-        this?.rating?.toDomain() ?? const Iterable.empty() as Rating;
-    return Products(
-        this?.id.orZero() ?? Constants.zero,
-        this?.title.orEmpty() ?? Constants.empty,
-        this?.price ?? Constants.doubleZero,
-        this?.description.orEmpty() ?? Constants.empty,
-        this?.category.orEmpty() ?? Constants.empty,
-        this?.image.orEmpty() ?? Constants.empty,
-        rating);
+extension ProductsResponseMapper on List<ProductsResponse>? {
+  List<Products> toDomain() {
+    if (this != null) {
+      return this!
+          .map((productsResponse) => Products(
+              productsResponse.id.orZero(),
+              productsResponse.title.orEmpty(),
+              productsResponse.price.orDoubleZero(),
+              productsResponse.description.orEmpty(),
+              productsResponse.category.orEmpty(),
+              productsResponse.image.orEmpty(),
+              productsResponse.rating.toDomain()))
+          .toList();
+    } else {
+      return const Iterable.empty().cast<Products>().toList();
+    }
   }
 }
-
+/*
 extension HomeProductsResponseMapper on HomeProductsResponse? {
   HomeProducts toDomain() {
     List<Products> homeProducts =
@@ -34,7 +38,7 @@ extension HomeProductsResponseMapper on HomeProductsResponse? {
             .toList();
     return HomeProducts(homeProducts);
   }
-}
+}*/
 
 extension RaitingResponseMapper on RatingResponse? {
   Rating toDomain() {

@@ -36,7 +36,7 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, HomeProducts>> getHomeProducts() async {
+  Future<Either<Failure, List<Products>>> getHomeProducts() async {
     if (await _networkInfo.isConnected) {
       try {
         //internet is connected , its safe to call API
@@ -44,13 +44,11 @@ class RepositoryImpl implements Repository {
 
         if (response != null) {
           //return the data
-          print(response.products);
           return Right(response.toDomain());
         } else {
           return Left(Failure(409, "business error"));
         }
       } catch (error) {
-        print(error.toString());
         return Left(ErrorHandler.handle(error).failure);
       }
     } else {

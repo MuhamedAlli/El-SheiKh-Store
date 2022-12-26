@@ -11,6 +11,12 @@ class AppStrings {
       "download our application and buy using phone or laptp";
   static const String onBoardingSubTitle3 =
       "modern delivering technologies. shipping to the porch of your apartment";
+  static const String home = "Home";
+  static const String category = "Categories";
+  static const String whiteList = "Favorites";
+  static const String cart = "Cart";
+  static const String setting = "Settings";
+  static const String products = "Products";
 
   static const String success = "success";
   static const badRequestError = "bad request. try again later";

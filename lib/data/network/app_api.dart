@@ -11,7 +11,7 @@ abstract class AppServiceClient {
   Future<LoginResponse> login(
       @Field("username") String username, @Field("password") String password);
   @GET("/products/")
-  Future<HomeProductsResponse?> getHomeProducts();
+  Future<List<ProductsResponse>?> getHomeProducts();
   @GET("/products/category/")
-  Future<HomeProductsResponse?> getHomeCategory(@Path() String categoryName);
+  Future<List<ProductsResponse>?> getHomeCategory(@Path() String categoryName);
 }

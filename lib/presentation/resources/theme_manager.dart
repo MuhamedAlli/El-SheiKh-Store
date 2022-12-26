@@ -42,21 +42,21 @@ ThemeData getApplicationTheme() {
       headlineLarge:
           getBoldStyle(color: ColorManager.primary, fontSize: AppSize.s18),
       headlineMedium:
-          getRegularStyle(color: ColorManager.grey, fontSize: AppSize.s14),
+          getRegularStyle(color: ColorManager.grey, fontSize: AppSize.s18),
       titleMedium:
           getMediumStyle(color: ColorManager.primary, fontSize: AppSize.s18),
       titleSmall:
           getRegularStyle(color: ColorManager.white, fontSize: AppSize.s18),
       labelSmall:
           getBoldStyle(color: ColorManager.primary, fontSize: AppSize.s12),
-      /*labelLarge:
-          getRegularStyle(color: ColorManager.gray2, fontSize: AppSize.s12),
+      labelLarge:
+          getRegularStyle(color: ColorManager.darkGrey, fontSize: AppSize.s12),
       bodyMedium:
           getMediumStyle(color: ColorManager.primary, fontSize: AppSize.s14),
       bodyLarge:
-          getRegularStyle(color: ColorManager.gray1, fontSize: AppSize.s14),
-      bodySmall: getRegularStyle(color: ColorManager.gray),
-      displaySmall:
+          getRegularStyle(color: ColorManager.black, fontSize: AppSize.s14),
+      bodySmall: getRegularStyle(color: ColorManager.lightGrey),
+      /**displaySmall:
           getSemiBoldStyle(color: ColorManager.primary, fontSize: AppSize.s18),
       labelMedium:
           getMeiumStyle(color: ColorManager.gray2, fontSize: AppSize.s14),
