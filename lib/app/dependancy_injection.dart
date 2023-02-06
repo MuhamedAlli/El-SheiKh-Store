@@ -6,8 +6,10 @@ import 'package:elsheikh_store/data/network/dio_factory.dart';
 import 'package:elsheikh_store/data/network/network_info.dart';
 import 'package:elsheikh_store/data/repository_impl/repository_impl.dart';
 import 'package:elsheikh_store/domain/repository/repository.dart';
+import 'package:elsheikh_store/domain/usecase/categories_usecase.dart';
 import 'package:elsheikh_store/domain/usecase/home_product_usecase.dart';
 import 'package:elsheikh_store/domain/usecase/login_usecase.dart';
+import 'package:elsheikh_store/presentation/business_logic/cubit/category_cubit/category_page_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -60,5 +62,14 @@ initHomeModule() {
         () => HomeProductUseCase(instance<Repository>()));
     instance.registerFactory<HomePageCubit>(() =>
         HomePageCubit(homeProductUseCase: instance<HomeProductUseCase>()));
+  }
+}
+
+initCatModule() {
+  if (!GetIt.I.isRegistered<CategoriesUseCase>()) {
+    instance.registerFactory<CategoriesUseCase>(
+        () => CategoriesUseCase(instance<Repository>()));
+    instance.registerFactory<CategoryPageCubit>(() =>
+        CategoryPageCubit(categoriesUseCase: instance<CategoriesUseCase>()));
   }
 }

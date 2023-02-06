@@ -226,13 +226,17 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: AppSize.s8),
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            product.title.substring(0, 10),
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          )),
+                      child: SizedBox(
+                        width: 140,
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              product.title,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            )),
+                      ),
                     ),
                   ],
                 ),

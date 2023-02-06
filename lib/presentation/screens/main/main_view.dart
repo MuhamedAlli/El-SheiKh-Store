@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../app/dependancy_injection.dart';
+import '../../business_logic/cubit/category_cubit/category_page_cubit.dart';
 import '../../business_logic/cubit/home_cubit/home_page_cubit.dart';
 
 class MainView extends StatefulWidget {
@@ -26,7 +27,10 @@ class _MainViewState extends State<MainView> {
       create: (context) => instance<HomePageCubit>(),
       child: const HomePage(),
     ),
-    const CategoryPage(),
+    BlocProvider(
+      create: (context) => instance<CategoryPageCubit>(),
+      child: const CategoryPage(),
+    ),
     const WhiteListPage(),
     const CartPage(),
     const ProfilePage()

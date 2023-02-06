@@ -5,6 +5,7 @@ import 'package:elsheikh_store/data/response/responses.dart';
 abstract class RemoteDataSource {
   Future<LoginResponse> login(LoginRequest loginRequest);
   Future<List<ProductsResponse>?> getHomeProducts();
+  Future<List<String>?> getCategories();
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -19,5 +20,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<List<ProductsResponse>?> getHomeProducts() async {
     return await _appServiceClient.getHomeProducts();
+  }
+
+  @override
+  Future<List<String>?> getCategories() async {
+    return await _appServiceClient.getCategories();
   }
 }

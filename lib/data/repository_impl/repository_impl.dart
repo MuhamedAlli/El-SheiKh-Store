@@ -56,4 +56,26 @@ class RepositoryImpl implements Repository {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, List<String>>> getCategories() async {
+    if (await _networkInfo.isConnected) {
+      try {
+        //internet is connected , its safe to call API
+        final response = await _remoteDataSource.getCategories();
+
+        if (response != null) {
+          //return the data
+          return Right(response);
+        } else {
+          return Left(Failure(409, "business error"));
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      //no Internet Connection!
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
 }

@@ -11,7 +11,6 @@ import '../../resources/routes_manager.dart';
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({super.key});
-
   @override
   State<OnBoardingView> createState() => _OnBoardingViewState();
 }
@@ -36,6 +35,12 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   void initState() {
     _list = getDataOfSliderObject();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override

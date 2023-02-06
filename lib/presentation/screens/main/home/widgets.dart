@@ -14,14 +14,15 @@ Widget productItem(BuildContext context, Products product) {
           height: AppSize.s100,
         ),
         Text(
-          product.title.substring(0, 15),
+          product.title,
+          overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              product.price.toString(),
+              "${product.price} \$",
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             const Icon(
