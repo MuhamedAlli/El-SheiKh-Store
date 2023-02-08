@@ -14,6 +14,8 @@ abstract class AppServiceClient {
   Future<List<ProductsResponse>?> getHomeProducts();
   @GET("/products/categories")
   Future<List<String>?> getCategories();
-  @GET("/products/category/")
+  @GET("/products/category/{categoryName}")
   Future<List<ProductsResponse>?> getHomeCategory(@Path() String categoryName);
+  @GET("/carts/user/{id}")
+  Future<List<CartResponse>?> getCart(@Path() int id);
 }

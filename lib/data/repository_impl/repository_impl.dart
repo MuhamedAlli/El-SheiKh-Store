@@ -78,4 +78,51 @@ class RepositoryImpl implements Repository {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, List<Products>>> getHomeCategory(
+      String catName) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        //internet is connected , its safe to call API
+        final response = await _remoteDataSource.getHomeCategory(catName);
+        //print(response.toString());
+        if (response != null) {
+          //return the data
+          return Right(response.toDomain());
+        } else {
+          return Left(Failure(409, "business error"));
+        }
+      } catch (error) {
+        //print(error.toString());
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      //no Internet Connection!
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CartModel>>> getCart(int id) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        //internet is connected , its safe to call API
+        final response = await _remoteDataSource.getCart(id);
+        print(response.toString());
+        if (response != null) {
+          //return the data
+          return Right(response.toDomain());
+        } else {
+          return Left(Failure(409, "business error"));
+        }
+      } catch (error) {
+        print(error.toString());
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      //no Internet Connection!
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
 }

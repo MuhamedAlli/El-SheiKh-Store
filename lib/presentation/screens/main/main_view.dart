@@ -52,15 +52,28 @@ class _MainViewState extends State<MainView> {
     return Scaffold(
       backgroundColor: ColorManager.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        iconTheme: const IconThemeData(
+          color: Colors.black, //change your color here
+        ),
         backgroundColor: ColorManager.white,
         elevation: Constants.doubleZero,
         leadingWidth: Constants.doubleZero,
-        title: Center(
-          child: Text(
-            _title,
-            style: Theme.of(context).textTheme.headlineLarge,
-          ),
+        title: Text(
+          _title,
+          style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                fontSize: 20,
+              ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.search,
+              size: 25,
+            ),
+          ),
+        ],
       ),
       body: pages[_currentIndex],
       bottomNavigationBar: Container(
@@ -98,5 +111,10 @@ class _MainViewState extends State<MainView> {
       _currentIndex = index;
       _title = titles[index];
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

@@ -6,6 +6,8 @@ abstract class RemoteDataSource {
   Future<LoginResponse> login(LoginRequest loginRequest);
   Future<List<ProductsResponse>?> getHomeProducts();
   Future<List<String>?> getCategories();
+  Future<List<ProductsResponse>?> getHomeCategory(String catName);
+  Future<List<CartResponse>?> getCart(int id);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -25,5 +27,15 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<List<String>?> getCategories() async {
     return await _appServiceClient.getCategories();
+  }
+
+  @override
+  Future<List<ProductsResponse>?> getHomeCategory(String catName) async {
+    return await _appServiceClient.getHomeCategory(catName);
+  }
+
+  @override
+  Future<List<CartResponse>?> getCart(int id) async {
+    return await _appServiceClient.getCart(id);
   }
 }

@@ -1,6 +1,9 @@
+import 'package:elsheikh_store/presentation/business_logic/cubit/cubit_products/category_products_cubit.dart';
 import 'package:elsheikh_store/presentation/screens/login/login_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../app/dependancy_injection.dart';
+import '../screens/main/category/products_of_particular_category.dart';
 import 'strings_manager.dart';
 import '../screens/main/main_view.dart';
 import '../screens/onboarding/onboaring_view.dart';
@@ -16,6 +19,7 @@ class Routes {
   static const String onBoardingRoute = "/onBoardingRoute";
   static const String mainRoute = "/mainRoute";
   static const String storeDetailsRoute = "/storeDetailsRoute";
+  static const String categoryProductsRoute = "/categoryProductsRoute";
 }
 
 class RouteGenerator {
@@ -33,6 +37,15 @@ class RouteGenerator {
       case Routes.registerRoute:
         return MaterialPageRoute(
           builder: ((_) => const RegisterView()),
+        );
+      case Routes.categoryProductsRoute:
+        initCatProductsModule();
+        var arg = settings.arguments;
+        return MaterialPageRoute(
+          builder: ((_) => BlocProvider(
+                create: (context) => instance<CategoryProductsCubit>(),
+                child: CategoryProductsPage(arg),
+              )),
         );
       case Routes.mainRoute:
         initHomeModule();

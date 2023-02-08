@@ -59,3 +59,24 @@ class Category {
   Category(this.id, this.title, this.price, this.description, this.category,
       this.image, this.rating);
 }
+
+class CartModel {
+  int id;
+  int userId;
+  String date;
+  List<ProductOfCatModel> products;
+  int iV;
+  CartModel(this.id, this.userId, this.date, this.products, this.iV);
+}
+
+class ProductOfCatModel {
+  int productId;
+  int quantity;
+
+  ProductOfCatModel(this.productId, this.quantity);
+}
+
+class UserCartModel {
+  List<CartModel> carts;
+  UserCartModel(this.carts);
+}

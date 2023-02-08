@@ -103,3 +103,36 @@ Map<String, dynamic> _$HomeCategoryResponseToJson(
     <String, dynamic>{
       'category': instance.category,
     };
+
+CartResponse _$CartResponseFromJson(Map<String, dynamic> json) => CartResponse(
+      id: json['id'] as int?,
+      userId: json['userId'] as int?,
+      date: json['date'] as String?,
+      products: (json['products'] as List<dynamic>?)
+          ?.map((e) => ProductOfCatResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      iV: json['__V'] as int?,
+    );
+
+Map<String, dynamic> _$CartResponseToJson(CartResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'userId': instance.userId,
+      'date': instance.date,
+      'products': instance.products,
+      '__V': instance.iV,
+    };
+
+ProductOfCatResponse _$ProductOfCatResponseFromJson(
+        Map<String, dynamic> json) =>
+    ProductOfCatResponse(
+      productId: json['productId'] as int?,
+      quantity: json['quantity'] as int?,
+    );
+
+Map<String, dynamic> _$ProductOfCatResponseToJson(
+        ProductOfCatResponse instance) =>
+    <String, dynamic>{
+      'productId': instance.productId,
+      'quantity': instance.quantity,
+    };

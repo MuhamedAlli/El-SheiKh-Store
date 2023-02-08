@@ -46,3 +46,39 @@ extension RaitingResponseMapper on RatingResponse? {
         this?.count.orZero() ?? Constants.zero);
   }
 }
+
+extension CartResponseMapper on List<CartResponse>? {
+  List<CartModel> toDomain() {
+    if (this != null) {
+      return this!
+          .map(
+            (cartResponse) => CartModel(
+                cartResponse.id.orZero(),
+                cartResponse.userId.orZero(),
+                cartResponse.date.orEmpty(),
+                cartResponse.products.toDomain(),
+                cartResponse.iV.orZero()),
+          )
+          .toList();
+    } else {
+      return const Iterable.empty().cast<CartModel>().toList();
+    }
+  }
+}
+
+extension ProductOfCatResponseMapper on List<ProductOfCatResponse>? {
+  List<ProductOfCatModel> toDomain() {
+    if (this != null) {
+      return this!
+          .map(
+            (productOfCatResponse) => ProductOfCatModel(
+              productOfCatResponse.productId.orZero(),
+              productOfCatResponse.quantity.orZero(),
+            ),
+          )
+          .toList();
+    } else {
+      return const Iterable.empty().cast<ProductOfCatModel>().toList();
+    }
+  }
+}

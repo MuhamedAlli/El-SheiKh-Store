@@ -91,3 +91,36 @@ class HomeCategoryResponse {
   factory HomeCategoryResponse.fromJson(Map<String, dynamic> json) =>
       _$HomeCategoryResponseFromJson(json);
 }
+
+@JsonSerializable()
+class CartResponse {
+  @JsonKey(name: "id")
+  int? id;
+  @JsonKey(name: "userId")
+  int? userId;
+  @JsonKey(name: "date")
+  String? date;
+  @JsonKey(name: "products")
+  List<ProductOfCatResponse>? products;
+  @JsonKey(name: "__V")
+  int? iV;
+
+  CartResponse({this.id, this.userId, this.date, this.products, this.iV});
+  Map<String, dynamic> toJson() => _$CartResponseToJson(this);
+  factory CartResponse.fromJson(Map<String, dynamic> json) =>
+      _$CartResponseFromJson(json);
+}
+
+@JsonSerializable()
+class ProductOfCatResponse {
+  @JsonKey(name: "productId")
+  int? productId;
+  @JsonKey(name: "quantity")
+  int? quantity;
+
+  ProductOfCatResponse({this.productId, this.quantity});
+
+  Map<String, dynamic> toJson() => _$ProductOfCatResponseToJson(this);
+  factory ProductOfCatResponse.fromJson(Map<String, dynamic> json) =>
+      _$ProductOfCatResponseFromJson(json);
+}

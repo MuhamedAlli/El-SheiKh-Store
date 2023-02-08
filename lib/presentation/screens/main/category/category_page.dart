@@ -1,4 +1,6 @@
 import 'package:elsheikh_store/presentation/business_logic/cubit/category_cubit/category_page_cubit.dart';
+import 'package:elsheikh_store/presentation/resources/assets_manager.dart';
+import 'package:elsheikh_store/presentation/resources/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,12 +27,13 @@ class _CategoryPageState extends State<CategoryPage> {
       child: BlocBuilder<CategoryPageCubit, CategoryPageState>(
         builder: (context, state) {
           if (state is CategoryPageInitial) {
-            return SizedBox(
-              height: AppSize.s190,
-              width: double.infinity,
-              child: Center(
-                child: CircularProgressIndicator(
-                  color: ColorManager.primary,
+            return Expanded(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: ColorManager.primary,
+                  ),
                 ),
               ),
             );
@@ -48,30 +51,68 @@ class _CategoryPageState extends State<CategoryPage> {
     );
   }
 
+  List<String> categoryImages = [
+    ImageAssets.electricImage,
+    ImageAssets.jewelryImage,
+    ImageAssets.menImage,
+    ImageAssets.womenImage,
+  ];
   Widget _getCategoryWidget(List<String> categories) {
+    categories.sort();
     return Column(
-      children: List.generate(categories.length, (index) {
-        return Container(
-          height: 100,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 1.2,
-              color: ColorManager.primary,
-            ),
-          ),
-          child: Align(
-              alignment: Alignment.center,
-              child: Text(
-                categories[index],
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 30,
-                  color: Colors.black,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: List.generate(
+        categories.length,
+        (index) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed(
+                Routes.categoryProductsRoute,
+                arguments: {"catName": categories[index]},
+              );
+            },
+            child: Container(
+              margin: const EdgeInsets.all(AppMargin.m10),
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                border: Border.all(
+                  width: 1.5,
+                  color: Colors.grey,
                 ),
-              )),
-        );
-      }),
+                color: Colors.grey[300],
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset(
+                    categoryImages[index],
+                    fit: BoxFit.cover,
+                    width: 180,
+                    height: 150,
+                  ),
+                  Text(
+                    categories[index],
+                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                          fontSize: 18,
+                        ),
+                  ),
+                  const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 25,
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

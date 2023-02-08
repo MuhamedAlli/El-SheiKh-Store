@@ -14,7 +14,9 @@ import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../domain/usecase/category_product_usecase.dart';
 import '../presentation/business_logic/bloc/login_bloc/login_bloc.dart';
+import '../presentation/business_logic/cubit/cubit_products/category_products_cubit.dart';
 import '../presentation/business_logic/cubit/home_cubit/home_page_cubit.dart';
 
 final instance = GetIt.instance;
@@ -71,5 +73,15 @@ initCatModule() {
         () => CategoriesUseCase(instance<Repository>()));
     instance.registerFactory<CategoryPageCubit>(() =>
         CategoryPageCubit(categoriesUseCase: instance<CategoriesUseCase>()));
+  }
+}
+
+//init module to get Products of particular Category
+initCatProductsModule() {
+  if (!GetIt.I.isRegistered<CategoryProductUseCase>()) {
+    instance.registerFactory<CategoryProductUseCase>(
+        () => CategoryProductUseCase(instance<Repository>()));
+    instance.registerFactory<CategoryProductsCubit>(() => CategoryProductsCubit(
+        categoryProductsUseCase: instance<CategoryProductUseCase>()));
   }
 }
