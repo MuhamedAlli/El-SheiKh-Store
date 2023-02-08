@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:elsheikh_store/presentation/resources/strings_manager.dart';
 import 'package:elsheikh_store/presentation/screens/main/home/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,9 +35,7 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _getBannersCarousel(),
-          _getSection(AppStrings.category),
-          _getCategoryWidget(),
-          _getSection(AppStrings.products),
+          _getSection("New Products"),
           _getProductWidget(),
         ],
       ),
@@ -77,8 +74,9 @@ class _HomePageState extends State<HomePage> {
       children: [
         GridView.count(
           crossAxisCount: AppSize.s_2,
-          crossAxisSpacing: AppSize.s8,
-          mainAxisSpacing: AppSize.s8,
+          //crossAxisSpacing: AppSize.s8,
+          // mainAxisSpacing: AppSize.s8,
+          childAspectRatio: 1 / 1.2,
           physics: const ScrollPhysics(),
           shrinkWrap: true,
           children: List.generate(products.length, (index) {
@@ -86,15 +84,7 @@ class _HomePageState extends State<HomePage> {
               onTap: (() {
                 //Navigator.of(context).pushNamed(Routes.storeDetailsRoute);
               }),
-              child: Card(
-                elevation: AppSize.s4,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSize.s18),
-                  side: BorderSide(
-                      color: ColorManager.lightGrey, width: AppSize.s1),
-                ),
-                child: productItem(context, products[index]),
-              ),
+              child: productItem(context, products[index]),
             );
           }),
         ),
@@ -103,10 +93,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _getSection(String section) {
-    return Text(
-      section,
-      style: Theme.of(context).textTheme.headlineLarge,
-      textAlign: TextAlign.start,
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 10,
+        bottom: 10,
+      ),
+      child: Text(
+        section,
+        style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+              fontSize: 22,
+            ),
+        textAlign: TextAlign.start,
+      ),
     );
   }
 
@@ -142,23 +140,13 @@ class _HomePageState extends State<HomePage> {
           .map(
             (banner) => SizedBox(
               width: double.infinity,
-              child: Card(
-                elevation: AppSize.s0_5,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSize.s12),
-                  side: BorderSide(
-                    color: ColorManager.lightGrey,
-                    width: AppSize.s1,
-                  ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(
+                  AppSize.s12,
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                    AppSize.s12,
-                  ),
-                  child: Image.network(
-                    banner.image,
-                    fit: BoxFit.cover,
-                  ),
+                child: Image.network(
+                  banner.image,
+                  //fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -166,6 +154,8 @@ class _HomePageState extends State<HomePage> {
           .toList(),
       options: CarouselOptions(
         height: AppSize.s190,
+        initialPage: 0,
+        viewportFraction: 1.0,
         autoPlay: true,
         enableInfiniteScroll: true,
         enlargeCenterPage: true,
@@ -173,7 +163,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _getCategoryWidget() {
+  /*Widget _getCategoryWidget() {
     return BlocBuilder<HomePageCubit, HomePageState>(
         builder: ((context, state) {
       if (state is HomePageInitial) {
@@ -196,9 +186,9 @@ class _HomePageState extends State<HomePage> {
         return Container();
       }
     }));
-  }
+  }*/
 
-  Widget _getCategoryItems(List<Products> products) {
+  /* Widget _getCategoryItems(List<Products> products) {
     return Container(
       height: AppSize.s140,
       margin: const EdgeInsets.symmetric(vertical: AppSize.s12),
@@ -245,5 +235,10 @@ class _HomePageState extends State<HomePage> {
             .toList(),
       ),
     );
+  }*/
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
