@@ -7,7 +7,6 @@ import 'package:elsheikh_store/presentation/screens/main/cart/cart_page.dart';
 import 'package:elsheikh_store/presentation/screens/main/category/category_page.dart';
 import 'package:elsheikh_store/presentation/screens/main/home/home_page.dart';
 import 'package:elsheikh_store/presentation/screens/main/profile/profile_page.dart';
-import 'package:elsheikh_store/presentation/screens/main/white_list/white_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,7 +31,6 @@ class _MainViewState extends State<MainView> {
       create: (context) => instance<CategoryPageCubit>(),
       child: const CategoryPage(),
     ),
-    const WhiteListPage(),
     BlocProvider(
       create: (context) => instance<CartCubit>(),
       child: const CartPage(),
@@ -42,7 +40,6 @@ class _MainViewState extends State<MainView> {
   List<String> titles = [
     AppStrings.home,
     AppStrings.category,
-    AppStrings.whiteList,
     AppStrings.cart,
     AppStrings.setting
   ];
@@ -97,9 +94,6 @@ class _MainViewState extends State<MainView> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.category_outlined),
                 label: AppStrings.category),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_outline),
-                label: AppStrings.whiteList),
             BottomNavigationBarItem(
                 icon: Icon(Icons.shopping_cart), label: AppStrings.cart),
             BottomNavigationBarItem(
