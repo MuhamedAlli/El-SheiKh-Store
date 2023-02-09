@@ -80,7 +80,7 @@ class _CategoryPageState extends State<CategoryPage> {
                   width: 1.5,
                   color: Colors.grey,
                 ),
-                color: Colors.grey[300],
+                color: Colors.grey[200],
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,

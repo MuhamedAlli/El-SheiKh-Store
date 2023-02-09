@@ -49,16 +49,18 @@ class CartCubit extends Cubit<CartState> {
           final result = await _productByIdUseCase
               .excute(cartList[i].products[j].productId);
           result.fold(
-              (failure) => emit(
-                    CartFailureSate(failure),
-                  ), (product) {
-            productsOfUserCart.add(product);
-            totalPrice +=
-                cartList[i].products[j].quantity * productsOfUserCart[j].price;
-            return emit(
-              GetProductByIdSuccessState(product),
-            );
-          });
+            (failure) => emit(
+              CartFailureSate(failure),
+            ),
+            (product) {
+              productsOfUserCart.add(product);
+              totalPrice += cartList[i].products[j].quantity *
+                  productsOfUserCart[j].price;
+              return emit(
+                GetProductByIdSuccessState(product),
+              );
+            },
+          );
         }
       }
     }
