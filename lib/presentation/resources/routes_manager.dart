@@ -50,6 +50,7 @@ class RouteGenerator {
       case Routes.mainRoute:
         initHomeModule();
         initCatModule();
+        initCartModule();
         return MaterialPageRoute(
           builder: ((_) => const MainView()),
         );

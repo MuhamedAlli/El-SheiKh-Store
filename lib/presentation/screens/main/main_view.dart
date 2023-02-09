@@ -1,4 +1,5 @@
 import 'package:elsheikh_store/app/constants.dart';
+import 'package:elsheikh_store/presentation/business_logic/cubit/cart_cubit/cart_cubit.dart';
 import 'package:elsheikh_store/presentation/resources/color_manager.dart';
 import 'package:elsheikh_store/presentation/resources/strings_manager.dart';
 import 'package:elsheikh_store/presentation/resources/values_manager.dart';
@@ -32,7 +33,10 @@ class _MainViewState extends State<MainView> {
       child: const CategoryPage(),
     ),
     const WhiteListPage(),
-    const CartPage(),
+    BlocProvider(
+      create: (context) => instance<CartCubit>(),
+      child: const CartPage(),
+    ),
     const ProfilePage()
   ];
   List<String> titles = [

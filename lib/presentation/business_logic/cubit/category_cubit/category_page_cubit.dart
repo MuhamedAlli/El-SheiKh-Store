@@ -1,5 +1,4 @@
 import 'dart:ffi';
-
 import 'package:elsheikh_store/domain/usecase/categories_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

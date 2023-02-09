@@ -72,7 +72,6 @@ class CartModel {
 class ProductOfCatModel {
   int productId;
   int quantity;
-
   ProductOfCatModel(this.productId, this.quantity);
 }
 

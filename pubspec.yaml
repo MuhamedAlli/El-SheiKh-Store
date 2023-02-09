@@ -4,7 +4,6 @@ description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 # Remove this line if you wish to publish to pub.dev
-
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
 # followed by an optional build number separated by a +.
@@ -31,6 +30,7 @@ dependencies:
   analyzer: ^5.2.0
   build_runner: ^2.3.2
   carousel_slider: ^4.2.1
+  conditional_builder_null_safety: null
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   dio: ^4.0.6

@@ -109,7 +109,7 @@ class RepositoryImpl implements Repository {
       try {
         //internet is connected , its safe to call API
         final response = await _remoteDataSource.getCart(id);
-        print(response.toString());
+        //print("From Car Repo /// ${response![0].date}");
         if (response != null) {
           //return the data
           return Right(response.toDomain());
@@ -117,7 +117,30 @@ class RepositoryImpl implements Repository {
           return Left(Failure(409, "business error"));
         }
       } catch (error) {
-        print(error.toString());
+        //  print(error.toString());
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      //no Internet Connection!
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Products>> getProductById(int id) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        //internet is connected , its safe to call API
+        final response = await _remoteDataSource.getProductById(id);
+        //print("From ProductOfUserCart Repo /// ${response![0].date}");
+        if (response != null) {
+          //return the data
+          return Right(response.toDomain());
+        } else {
+          return Left(Failure(409, "business error"));
+        }
+      } catch (error) {
+        //print(error.toString());
         return Left(ErrorHandler.handle(error).failure);
       }
     } else {

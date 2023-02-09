@@ -6,15 +6,18 @@ import 'package:elsheikh_store/data/network/dio_factory.dart';
 import 'package:elsheikh_store/data/network/network_info.dart';
 import 'package:elsheikh_store/data/repository_impl/repository_impl.dart';
 import 'package:elsheikh_store/domain/repository/repository.dart';
+import 'package:elsheikh_store/domain/usecase/cart_usecase.dart';
 import 'package:elsheikh_store/domain/usecase/categories_usecase.dart';
 import 'package:elsheikh_store/domain/usecase/home_product_usecase.dart';
 import 'package:elsheikh_store/domain/usecase/login_usecase.dart';
+import 'package:elsheikh_store/presentation/business_logic/cubit/cart_cubit/cart_cubit.dart';
 import 'package:elsheikh_store/presentation/business_logic/cubit/category_cubit/category_page_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../domain/usecase/category_product_usecase.dart';
+import '../domain/usecase/product_by_id_usecase.dart';
 import '../presentation/business_logic/bloc/login_bloc/login_bloc.dart';
 import '../presentation/business_logic/cubit/cubit_products/category_products_cubit.dart';
 import '../presentation/business_logic/cubit/home_cubit/home_page_cubit.dart';
@@ -83,5 +86,32 @@ initCatProductsModule() {
         () => CategoryProductUseCase(instance<Repository>()));
     instance.registerFactory<CategoryProductsCubit>(() => CategoryProductsCubit(
         categoryProductsUseCase: instance<CategoryProductUseCase>()));
+  }
+}
+
+//init car module
+
+initCartModule() {
+  if (!GetIt.I.isRegistered<CartUseCase>()) {
+    instance.registerFactory<CartUseCase>(
+        () => CartUseCase(instance<Repository>()));
+    instance.registerFactory<ProductByIdUseCase>(
+        () => ProductByIdUseCase(instance<Repository>()));
+    instance.registerFactory<CartCubit>(() => CartCubit(
+          cartUseCase: instance<CartUseCase>(),
+          productByIdUseCase: instance<ProductByIdUseCase>(),
+        ));
+  }
+}
+//init getProductById For UserCart
+
+initGetProductByIdModule() {
+  if (!GetIt.I.isRegistered<ProductByIdUseCase>()) {
+    instance.registerFactory<ProductByIdUseCase>(
+        () => ProductByIdUseCase(instance<Repository>()));
+    instance.registerFactory<CartCubit>(() => CartCubit(
+          cartUseCase: instance<CartUseCase>(),
+          productByIdUseCase: instance<ProductByIdUseCase>(),
+        ));
   }
 }

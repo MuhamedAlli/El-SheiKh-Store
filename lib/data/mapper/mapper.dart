@@ -28,6 +28,22 @@ extension ProductsResponseMapper on List<ProductsResponse>? {
     }
   }
 }
+//
+
+extension ProductsResponse2Mapper on ProductsResponse? {
+  Products toDomain() {
+    return Products(
+      this?.id.orZero() ?? Constants.zero,
+      this?.title.orEmpty() ?? Constants.empty,
+      this?.price.orDoubleZero() ?? Constants.doubleZero,
+      this?.description.orEmpty() ?? Constants.empty,
+      this?.category.orEmpty() ?? Constants.empty,
+      this?.image.orEmpty() ?? Constants.empty,
+      this!.rating.toDomain(),
+    );
+  }
+}
+
 /*
 extension HomeProductsResponseMapper on HomeProductsResponse? {
   HomeProducts toDomain() {

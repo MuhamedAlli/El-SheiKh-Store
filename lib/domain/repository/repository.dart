@@ -9,4 +9,5 @@ abstract class Repository {
   Future<Either<Failure, List<String>>> getCategories();
   Future<Either<Failure, List<Products>>> getHomeCategory(String catName);
   Future<Either<Failure, List<CartModel>>> getCart(int id);
+  Future<Either<Failure, Products>> getProductById(int id);
 }
