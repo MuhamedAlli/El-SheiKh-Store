@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import '../../../app/app_prefs.dart';
+import '../../../app/dependancy_injection.dart';
 import '../../resources/assets_manager.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/constants_manager.dart';
@@ -15,12 +17,25 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   Timer? _timer;
-  _startDelay() {
+  AppPreferences appPreferences = instance<AppPreferences>();
+
+  late bool isViewedOnBoarding;
+  late bool isLoggedIn;
+  _startDelay() async {
+    isViewedOnBoarding = await appPreferences.isOnBoardingScreenViewed();
+    isLoggedIn = await appPreferences.isLoggedIn();
     _timer = Timer(const Duration(seconds: AppConstants.splashDelay), _goNext);
   }
 
   _goNext() {
-    Navigator.of(context).pushReplacementNamed(Routes.onBoardingRoute);
+    if (isLoggedIn) {
+      Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+    } else {
+      Navigator.of(context).pushReplacementNamed(Routes.loginRoute);
+    }
+    if (!isViewedOnBoarding) {
+      Navigator.of(context).pushReplacementNamed(Routes.onBoardingRoute);
+    }
   }
 
   @override

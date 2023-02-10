@@ -35,7 +35,7 @@ class _MainViewState extends State<MainView> {
       create: (context) => instance<CartCubit>(),
       child: const CartPage(),
     ),
-    const ProfilePage()
+    ProfilePage()
   ];
   List<String> titles = [
     AppStrings.home,

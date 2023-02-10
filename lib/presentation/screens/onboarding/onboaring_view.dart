@@ -1,3 +1,6 @@
+import 'package:elsheikh_store/app/app_prefs.dart';
+import 'package:elsheikh_store/app/dependancy_injection.dart';
+
 import '../../../domain/model/models.dart';
 import '../../resources/assets_manager.dart';
 import '../../resources/color_manager.dart';
@@ -43,6 +46,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     super.dispose();
   }
 
+  AppPreferences appPreferences = instance<AppPreferences>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,6 +73,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: (() {
+                  appPreferences.setOnBoardingScreenViewed();
                   Navigator.of(context).pushReplacementNamed(Routes.loginRoute);
                 }),
                 child: Text(

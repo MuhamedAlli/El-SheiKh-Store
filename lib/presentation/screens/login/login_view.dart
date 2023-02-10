@@ -1,3 +1,4 @@
+import 'package:elsheikh_store/app/app_prefs.dart';
 import 'package:elsheikh_store/app/dependancy_injection.dart';
 import 'package:elsheikh_store/presentation/business_logic/bloc/login_bloc/login_bloc.dart';
 import 'package:elsheikh_store/presentation/resources/assets_manager.dart';
@@ -51,17 +52,17 @@ class LoginForm extends StatelessWidget {
         child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              _LogoWidget(),
-              SizedBox(
+            children: [
+              const _LogoWidget(),
+              const SizedBox(
                 height: 40,
               ),
-              _UsernameInputWidget(),
-              SizedBox(
+              const _UsernameInputWidget(),
+              const SizedBox(
                 height: 20,
               ),
-              _PasswordInputWidget(),
-              SizedBox(
+              const _PasswordInputWidget(),
+              const SizedBox(
                 height: 30,
               ),
               _LoginButtonWidget(),
@@ -153,7 +154,8 @@ class _PasswordInputWidget extends StatelessWidget {
 }
 
 class _LoginButtonWidget extends StatelessWidget {
-  const _LoginButtonWidget();
+  _LoginButtonWidget();
+  final AppPreferences appPreferences = instance();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
@@ -168,6 +170,8 @@ class _LoginButtonWidget extends StatelessWidget {
                 ? () {
                     BlocProvider.of<LoginBloc>(context)
                         .add(const LoginSubmitted());
+
+                    appPreferences.setUserLoggedIn();
                   }
                 : null,
             child: const Text('Login'),
