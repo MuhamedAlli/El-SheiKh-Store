@@ -77,8 +77,8 @@ class _CategoryPageState extends State<CategoryPage> {
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
                 border: Border.all(
-                  width: 1.5,
-                  color: Colors.grey,
+                  width: 1,
+                  color: Colors.grey[300]!,
                 ),
                 color: Colors.grey[200],
               ),
@@ -100,6 +100,7 @@ class _CategoryPageState extends State<CategoryPage> {
                   ),
                   const Icon(
                     Icons.arrow_forward_ios,
+                    color: Colors.grey,
                     size: 25,
                   ),
                 ],

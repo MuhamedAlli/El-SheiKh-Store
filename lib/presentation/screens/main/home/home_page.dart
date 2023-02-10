@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../domain/model/models.dart';
 import '../../../business_logic/cubit/home_cubit/home_page_cubit.dart';
 import '../../../resources/color_manager.dart';
+import '../../../resources/routes_manager.dart';
 import '../../../resources/values_manager.dart';
 
 class HomePage extends StatefulWidget {
@@ -82,7 +83,8 @@ class _HomePageState extends State<HomePage> {
           children: List.generate(products.length, (index) {
             return InkWell(
               onTap: (() {
-                //Navigator.of(context).pushNamed(Routes.storeDetailsRoute);
+                Navigator.of(context).pushNamed(Routes.storeDetailsRoute,
+                    arguments: products[index]);
               }),
               child: productItem(context, products[index]),
             );

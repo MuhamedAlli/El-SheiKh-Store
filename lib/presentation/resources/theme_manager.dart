@@ -87,7 +87,7 @@ ThemeData getApplicationTheme() {
 OutlineInputBorder _getOutlineInputBorder(
     {required Color color, double appSize = AppSize.s8}) {
   return OutlineInputBorder(
-    borderSide: BorderSide(color: color, width: AppSize.s1_5),
+    borderSide: BorderSide(color: color, width: AppSize.s1),
     borderRadius: BorderRadius.all(
       Radius.circular(appSize),
     ),

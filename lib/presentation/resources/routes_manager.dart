@@ -1,3 +1,4 @@
+import 'package:elsheikh_store/domain/model/models.dart';
 import 'package:elsheikh_store/presentation/business_logic/cubit/cubit_products/category_products_cubit.dart';
 import 'package:elsheikh_store/presentation/screens/login/login_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,8 +60,11 @@ class RouteGenerator {
           builder: ((_) => const OnBoardingView()),
         );
       case Routes.storeDetailsRoute:
+        Products pro = settings.arguments as Products;
         return MaterialPageRoute(
-          builder: ((_) => const StoreDetailsView()),
+          builder: ((_) => StoreDetailsView(
+                productDetails: pro,
+              )),
         );
       default:
         return unDefinedRoute();
